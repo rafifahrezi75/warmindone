@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Warmindone</string>
+    <string name="daftar">Daftar</string>
+    <string name="selamat_datang">Selamat Datang</string>
+    <string name="silahkan_login">Silahkan Login Terlebih Dahulu</string>
+    <string name="masuk_dulu">Masuk untuk melanjutkan transaksi kamu.</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="atau_masuk_dengan">Atau masuk dengan</string>
+    <string name="masuk">Masuk</string>
+    <string name="atau">atau</string>
+    <string name="masukkan_username">Masukkan Username</string>
+    <string name="masukkan_password">Masukkan Password</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="todo">TODO</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="login_google">Login Google</string>
+    <string name="login_facebook">Login Facebook</string>
+    <string name="login_twitter">Login Facebook</string>
+    <string name="daftar_dulu">Daftar terlebih dahulu untuk bisa melakukan transaksi.</string>
+</resources>

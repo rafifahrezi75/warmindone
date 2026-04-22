@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "477767234714",
+    "project_id": "warmindone",
+    "storage_bucket": "warmindone.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477767234714:android:9a62c66250a0619bff1b23",
+        "android_client_info": {
+          "package_name": "com.example.warmindone"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVhtHfOqTdfBCL9TGTcR44xJbdsZtaAnk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
