@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         etNoHp = findViewById(R.id.etNoHp);
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
-        btnRegister = findViewById(R.id.btnLogin);
+        btnRegister = findViewById(R.id.btnRegister);
 
         btnRegister.setOnClickListener(v -> registerUser());
     }
