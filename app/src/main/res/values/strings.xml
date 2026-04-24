@@ -18,5 +18,8 @@
     <string name="login_google">Login Google</string>
     <string name="login_facebook">Login Facebook</string>
     <string name="login_twitter">Login Facebook</string>
+    <string name="selamat_datang_dashboard">Selamat Datang,</string>
+    <string name="kategoriModel">Kategori</string>
+    <string name="user">User</string>
     <string name="daftar_dulu">Daftar terlebih dahulu untuk bisa melakukan transaksi.</string>
 </resources>
