@@ -1,22 +1,21 @@
 package com.example.warmindone.kategori;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import android.content.Context;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.warmindone.R;
+import com.example.warmindone.kasiradmin.UbahKategoriActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
-
-import android.widget.ImageView;
-import android.widget.Toast;
-
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHolder> {
 
@@ -53,19 +52,52 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHo
 
         holder.tvNama.setText(kategoriModel.getKategori());
 
-        // EDIT
         holder.btnEdit.setOnClickListener(v -> {
-            Toast.makeText(context, "Edit: " + kategoriModel.getKategori(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(context, UbahKategoriActivity.class);
+            intent.putExtra("id", kategoriModel.getId());
+            intent.putExtra("nama", kategoriModel.getKategori());
+            context.startActivity(intent);
         });
 
-        // DELETE
         holder.btnDelete.setOnClickListener(v -> {
             FirebaseFirestore.getInstance()
                     .collection("kategori")
                     .document(kategoriModel.getId())
-                    .delete();
+                    .delete()
+                    .addOnSuccessListener(unused -> {
+                        Toast.makeText(context, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                    })
+                    .addOnFailureListener(e -> {
+                        Toast.makeText(context, "Gagal hapus", Toast.LENGTH_SHORT).show();
+                    });
+        });
 
-            Toast.makeText(context, "Deleted", Toast.LENGTH_SHORT).show();
+        holder.btnDelete.setOnClickListener(v -> {
+
+            new android.app.AlertDialog.Builder(context)
+                    .setTitle("Hapus Kategori")
+                    .setMessage("Yakin mau hapus \"" + kategoriModel.getKategori() + "\"?")
+                    .setPositiveButton("Hapus", (dialog, which) -> {
+
+                        FirebaseFirestore.getInstance()
+                                .collection("kategori")
+                                .document(kategoriModel.getId())
+                                .delete()
+                                .addOnSuccessListener(unused -> {
+
+                                    int pos = holder.getAdapterPosition();
+                                    list.remove(pos);
+                                    notifyItemRemoved(pos);
+
+                                    Toast.makeText(context, "Berhasil dihapus", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Toast.makeText(context, "Gagal hapus", Toast.LENGTH_SHORT).show();
+                                });
+
+                    })
+                    .setNegativeButton("Batal", null)
+                    .show();
         });
     }
 

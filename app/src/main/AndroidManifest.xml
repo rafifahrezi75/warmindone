@@ -32,6 +32,7 @@
         <activity android:name=".user.DashboardUser" android:exported="false"/>
         <activity android:name=".kasiradmin.KategoriActivity"/>
         <activity android:name=".kasiradmin.TambahKategoriActivity"/>
+        <activity android:name=".kasiradmin.UbahKategoriActivity"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
