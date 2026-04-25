@@ -6,77 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".kasiradmin.DashboardKasirAdmin">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="410dp"
-        android:layout_height="320dp"
-        android:layout_marginTop="-40dp"
-        app:cardBackgroundColor="#952D03"
-        app:cardCornerRadius="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="517dp"
-            android:layout_height="401dp"
-            android:layout_marginLeft="60dp"
-            android:layout_marginTop="-5dp"
-            app:srcCompat="@drawable/bgdashboardadmin" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="140dp"
-            android:orientation="horizontal"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp">
-
-            <TextView
-                android:id="@+id/selamatDatang"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/selamat_datang_dashboard"
-                android:textColor="@color/cardview_light_background"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/namaUser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/montserrat_semibold"
-                android:text="@string/user"
-                android:textColor="@color/cardview_light_background"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
     <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cardView"
-        android:layout_marginTop="16dp"
+        android:layout_width="370dp"
+        android:layout_height="544dp"
+        android:layout_below="@+id/cardView"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         android:columnCount="2"
-        android:rowCount="3">
+        android:rowCount="3"
+        tools:ignore="TextSizeCheck">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardKategori"
-            android:onClick="kategoripage"
-            android:layout_width="wrap_content"
+            android:layout_width="52dp"
             android:layout_height="wrap_content"
             android:layout_row="0"
             android:layout_rowWeight="1"
             android:layout_column="0"
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
+            android:onClick="kategoripage"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true">
@@ -85,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
+                android:contentDescription="TODO"
                 android:gravity="center"
                 android:orientation="vertical">
 
@@ -97,12 +48,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kategori"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
-
+                    android:textColor="#952D03"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 
@@ -129,18 +79,18 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
+                    android:padding="8dp"
                     android:src="@drawable/ic_menu" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Menu"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
-
+                    android:textColor="#952D03"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 
@@ -167,24 +117,24 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_kategori" />
+                    android:padding="8dp"
+                    android:src="@drawable/ic_pnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Income"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
-
+                    android:text="Pendapatan"
+                    android:textColor="#952D03"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardKasir"
-            android:layout_width="wrap_content"
+            android:layout_width="115dp"
             android:layout_height="wrap_content"
             android:layout_row="1"
             android:layout_rowWeight="1"
@@ -205,18 +155,17 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_kategori" />
+                    android:src="@drawable/ic_psn" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kasir"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
-
+                    android:text="Pesanan"
+                    android:textColor="#952D03"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
-
 
         </androidx.cardview.widget.CardView>
 
@@ -243,14 +192,15 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_kategori" />
+                    android:src="@drawable/ic_rwt" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="User"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+                    android:text="Riwayat"
+                    android:textColor="#952D03"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -278,18 +228,72 @@
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/ic_kategori" />
+                    android:padding="8dp"
+                    android:src="@drawable/ic_klr" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="LogOut"
-                    android:textColor="#333333"
-                    android:textSize="16sp" />
+                    android:textColor="#952D03"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
     </GridLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="198dp"
+        android:layout_marginTop="-20dp"
+        app:cardBackgroundColor="#952D03"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:cardPreventCornerOverlap="true"
+        tools:ignore="VisualLintBounds">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bg" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:orientation="horizontal"
+            android:paddingStart="30dp"
+            android:paddingEnd="30dp">
+
+            <TextView
+                android:id="@+id/selamatDatang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/selamat_datang_dashboard"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/namaUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/montserrat_semibold"
+                android:text="@string/user"
+                android:textColor="@color/cardview_light_background"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
