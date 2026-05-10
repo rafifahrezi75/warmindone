@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -18,21 +20,34 @@
             android:exported="true">
 
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
 
         <!-- Login Page -->
-        <activity android:name=".WelcomeActivity" android:exported="false"/>
-        <activity android:name=".LoginActivity" android:exported="false"/>
-        <activity android:name=".RegisterActivity" android:exported="false"/>
-        <activity android:name=".kasiradmin.DashboardKasirAdmin" android:exported="false"/>
-        <activity android:name=".user.DashboardUser" android:exported="false"/>
-        <activity android:name=".kasiradmin.KategoriActivity"/>
-        <activity android:name=".kasiradmin.TambahKategoriActivity"/>
-        <activity android:name=".kasiradmin.UbahKategoriActivity"/>
+        <activity
+            android:name=".WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".kasiradmin.DashboardKasirAdmin"
+            android:exported="false" />
+        <activity
+            android:name=".user.DashboardUser"
+            android:exported="false" />
+        <activity android:name=".kasiradmin.KategoriActivity" />
+        <activity android:name=".kasiradmin.TambahKategoriActivity" />
+        <activity android:name=".kasiradmin.UbahKategoriActivity" />
+        <activity android:name=".kasiradmin.MenuActivity" />
+        <activity android:name=".kasiradmin.TambahMenuActivity" />
+        <activity android:name=".kasiradmin.UbahMenuActivity" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
