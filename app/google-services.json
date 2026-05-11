@@ -12,7 +12,12 @@
           "package_name": "com.example.warmindone"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "477767234714-7p9kgsifcp2u4ruus345b433uouh9920.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCVhtHfOqTdfBCL9TGTcR44xJbdsZtaAnk"
@@ -20,7 +25,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "477767234714-7p9kgsifcp2u4ruus345b433uouh9920.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
