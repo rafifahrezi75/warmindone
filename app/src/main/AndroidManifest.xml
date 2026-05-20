@@ -46,6 +46,10 @@
         <activity android:name=".kasiradmin.TambahKategoriActivity"/>
         <activity android:name=".kasiradmin.UbahKategoriActivity"/>
 
+        <activity android:name=".kasiradmin.PendapatanActivity"/>
+
+        <activity android:name=".kasiradmin.PesananSelesaiActivity"/>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
