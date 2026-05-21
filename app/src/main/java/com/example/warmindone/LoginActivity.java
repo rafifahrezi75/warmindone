@@ -3,6 +3,7 @@ package com.example.warmindone;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     TextInputEditText etEmail, etPassword;
     MaterialButton btnLogin;
+    TextView txtDaftar;
 
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -27,15 +29,21 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // init
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        txtDaftar = findViewById(R.id.txtMasukWelcome);
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
         btnLogin.setOnClickListener(v -> loginUser());
+
+        // Navigasi ke halaman Register
+        txtDaftar.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void loginUser() {
@@ -52,36 +60,35 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        // LOGIN FIREBASE AUTH
+        // 1. LOGIN KE FIREBASE AUTH
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnSuccessListener(authResult -> {
-
                     String uid = mAuth.getCurrentUser().getUid();
 
-                    // AMBIL ROLE DARI FIRESTORE
+                    // 2. AMBIL DATA USER DARI FIRESTORE
                     db.collection("users").document(uid)
                             .get()
                             .addOnSuccessListener(documentSnapshot -> {
-
                                 if (documentSnapshot.exists()) {
                                     String role = documentSnapshot.getString("role");
-
                                     Toast.makeText(this, "Login berhasil sebagai " + role, Toast.LENGTH_SHORT).show();
 
-                                    // ARAHKAN BERDASARKAN ROLE
                                     if ("admin".equals(role)) {
                                         startActivity(new Intent(this, DashboardKasirAdmin.class));
                                     } else {
                                         startActivity(new Intent(this, DashboardUser.class));
                                     }
-
                                     finish();
+                                } else {
+                                    Toast.makeText(this, "Data user tidak ditemukan di database", Toast.LENGTH_LONG).show();
                                 }
+                            })
+                            .addOnFailureListener(e -> {
+                                Toast.makeText(this, "Gagal mengambil data: " + e.getMessage(), Toast.LENGTH_LONG).show();
                             });
-
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Login gagal: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Login gagal: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
 }

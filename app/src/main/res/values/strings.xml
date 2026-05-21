@@ -20,6 +20,7 @@
     <string name="login_twitter">Login Facebook</string>
     <string name="selamat_datang_dashboard">Selamat Datang,</string>
     <string name="kategoriModel">Kategori</string>
+    <string name="menuModel">Menu</string>
     <string name="user">User</string>
     <string name="daftar_dulu">Daftar terlebih dahulu untuk bisa melakukan transaksi.</string>
 </resources>

@@ -5,11 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.warmindone"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.warmindone"
@@ -49,4 +45,10 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation("com.google.firebase:firebase-auth:22.3.0")
     implementation("com.google.firebase:firebase-firestore:24.10.0")
+
+    implementation ("com.cloudinary:cloudinary-android:2.3.1")
+
+    implementation ("com.github.bumptech.glide:glide:4.16.0")
+
+    annotationProcessor ("com.github.bumptech.glide:compiler:4.16.0")
 }

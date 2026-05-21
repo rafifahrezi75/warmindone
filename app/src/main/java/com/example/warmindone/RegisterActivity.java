@@ -1,5 +1,6 @@
 package com.example.warmindone;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
@@ -27,11 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        // init firebase
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        // init view
         etEmail = findViewById(R.id.etEmail);
         etNoHp = findViewById(R.id.etNoHp);
         etUsername = findViewById(R.id.etUsername);
@@ -42,47 +41,47 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-
         String email = etEmail.getText().toString().trim();
         String noHp = etNoHp.getText().toString().trim();
         String nama = etUsername.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        // validasi sederhana
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(noHp)
-                || TextUtils.isEmpty(nama) || TextUtils.isEmpty(password)) {
-
+        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(noHp) || TextUtils.isEmpty(nama) || TextUtils.isEmpty(password)) {
             Toast.makeText(this, "Semua field wajib diisi!", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // REGISTER KE FIREBASE AUTH
+        if (password.length() < 6) {
+            etPassword.setError("Password minimal 6 karakter");
+            return;
+        }
+
+        btnRegister.setEnabled(false);
+
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
-
                     if (task.isSuccessful()) {
-
                         String uid = auth.getCurrentUser().getUid();
 
-                        // SIMPAN KE FIRESTORE
                         Map<String, Object> user = new HashMap<>();
                         user.put("nama", nama);
                         user.put("email", email);
                         user.put("no_telp", noHp);
-                        user.put("role", "user"); // default role
+                        user.put("role", "user"); 
 
                         db.collection("users").document(uid)
                                 .set(user)
                                 .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(this, "Register berhasil!", Toast.LENGTH_SHORT).show();
-
-                                    // TODO: pindah ke login / dashboard
+                                    Toast.makeText(this, "Register berhasil! Silakan Login", Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                    finish();
                                 })
                                 .addOnFailureListener(e -> {
-                                    Toast.makeText(this, "Gagal simpan data", Toast.LENGTH_SHORT).show();
+                                    btnRegister.setEnabled(true);
+                                    Toast.makeText(this, "Gagal simpan data: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                 });
-
                     } else {
+                        btnRegister.setEnabled(true);
                         Toast.makeText(this, "Register gagal: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
