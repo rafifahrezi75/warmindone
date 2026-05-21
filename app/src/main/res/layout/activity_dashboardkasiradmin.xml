@@ -113,6 +113,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMenu"
             android:layout_width="0dp"
+            android:onClick="menupage"
             android:layout_height="140dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
@@ -145,6 +146,7 @@
         <!-- INCOME -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardlaporanPendapatan"
+            android:onClick="pendapatanpage"
             android:layout_width="0dp"
             android:layout_height="140dp"
             android:layout_columnWeight="1"
