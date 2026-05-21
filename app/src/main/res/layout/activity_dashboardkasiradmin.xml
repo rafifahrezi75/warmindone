@@ -146,7 +146,7 @@
         <!-- INCOME -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardlaporanPendapatan"
-            android:onClick="pendapatanpage"
+            android:onClick="incomepage"
             android:layout_width="0dp"
             android:layout_height="140dp"
             android:layout_columnWeight="1"
@@ -179,7 +179,8 @@
 
         <!-- KASIR -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardKasir"
+            android:id="@+id/cardPesanan"
+            android:onClick="pesananpage"
             android:layout_width="0dp"
             android:layout_height="140dp"
             android:layout_columnWeight="1"
@@ -202,7 +203,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Kasir"
+                    android:text="Pesanan"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />

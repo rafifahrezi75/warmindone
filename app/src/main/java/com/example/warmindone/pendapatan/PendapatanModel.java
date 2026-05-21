@@ -10,12 +10,6 @@ public class PendapatanModel {
     public PendapatanModel() {
     }
 
-    public PendapatanModel(String id_order, Timestamp tanggal, long total) {
-        this.id_order = id_order;
-        this.tanggal = tanggal;
-        this.total = total;
-    }
-
     public String getId_order() {
         return id_order;
     }
