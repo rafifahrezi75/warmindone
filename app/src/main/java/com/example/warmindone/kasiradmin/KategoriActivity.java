@@ -2,6 +2,7 @@ package com.example.warmindone.kasiradmin;
 
 import android.os.Bundle;
 import android.content.Intent;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ public class KategoriActivity extends AppCompatActivity {
     private List<KategoriModel> list;
     private FirebaseFirestore db;
     private MaterialButton btnTambah;
+    private ImageView btnBack2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,7 @@ public class KategoriActivity extends AppCompatActivity {
         // INIT VIEW
         rvKategori = findViewById(R.id.recyclerKategori);
         btnTambah = findViewById(R.id.btnTambahKategori);
+        btnBack2 = findViewById(R.id.btnBack2);
 
         rvKategori.setLayoutManager(new LinearLayoutManager(this));
 
@@ -47,6 +50,10 @@ public class KategoriActivity extends AppCompatActivity {
             Intent intent = new Intent(KategoriActivity.this, TambahKategoriActivity.class);
             startActivity(intent);
         });
+
+        btnBack2.setOnClickListener(v -> finish());
+
+
 
         loadData();
     }
@@ -69,6 +76,7 @@ public class KategoriActivity extends AppCompatActivity {
                     adapter.notifyDataSetChanged();
                 });
     }
+
 
     @Override
     protected void onResume() {
