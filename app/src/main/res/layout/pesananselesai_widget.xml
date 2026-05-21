@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="12dp"
+    android:layout_marginHorizontal="14dp"
     android:layout_marginTop="10dp"
     app:cardCornerRadius="14dp"
     app:cardElevation="3dp"
@@ -14,9 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
         android:orientation="vertical"
-        android:padding="18dp">
+        android:padding="16dp">
 
         <!-- TOP -->
         <LinearLayout
@@ -25,7 +24,6 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <!-- INVOICE -->
             <TextView
                 android:id="@+id/tvInvoice"
                 android:layout_width="0dp"
@@ -33,10 +31,9 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="INV-1214114"
-                android:textColor="#2D2D2D"
-                android:textSize="20sp" />
+                android:textColor="#1F1F1F"
+                android:textSize="18sp" />
 
-            <!-- STATUS -->
             <TextView
                 android:id="@+id/tvStatus"
                 android:layout_width="wrap_content"
@@ -44,37 +41,48 @@
                 android:fontFamily="@font/montserrat_semibold"
                 android:text="Lunas"
                 android:textColor="#43A047"
-                android:textSize="16sp" />
+                android:textSize="13sp" />
 
         </LinearLayout>
 
-        <!-- CUSTOMER -->
+        <!-- NAMA -->
         <TextView
             android:id="@+id/tvNama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="18dp"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="Customer"
-            android:textColor="#333333"
-            android:textSize="17sp" />
+            android:text="Fahmi Zaki Achmad"
+            android:textColor="#2D2D2D"
+            android:textSize="15sp" />
+
+        <!-- EMAIL -->
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="email@gmail.com"
+            android:textColor="#9E9E9E"
+            android:textSize="12sp" />
 
         <!-- TANGGAL -->
         <TextView
             android:id="@+id/tvTanggal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/montserrat_medium"
             android:text="10 Mei 2026"
-            android:textColor="#8C8C8C"
-            android:textSize="13sp" />
+            android:textColor="#9E9E9E"
+            android:textSize="11sp" />
 
         <!-- BOTTOM -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="22dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
@@ -85,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/montserrat_bold"
-                android:text="Rp 100.000"
+                android:text="Rp, 100.000"
                 android:textColor="#A63600"
                 android:textSize="20sp" />
 
@@ -93,26 +101,26 @@
             <TextView
                 android:id="@+id/tvMetode"
                 android:layout_width="wrap_content"
-                android:layout_height="36dp"
-                android:layout_marginEnd="14dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="10dp"
                 android:background="@drawable/bg_filter"
                 android:gravity="center"
-                android:paddingHorizontal="18dp"
-                android:text="Tunai"
+                android:paddingHorizontal="16dp"
+                android:text="Qris"
                 android:textColor="#43A047"
-                android:textSize="14sp"
+                android:textSize="12sp"
                 android:textStyle="bold" />
 
             <!-- CHECK -->
             <LinearLayout
-                android:layout_width="38dp"
-                android:layout_height="38dp"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
                 android:background="@drawable/bg_orange_radius"
                 android:gravity="center">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:src="@drawable/ic_check" />
 
             </LinearLayout>
