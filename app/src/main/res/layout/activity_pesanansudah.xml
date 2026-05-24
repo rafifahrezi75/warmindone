@@ -22,7 +22,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <!-- BG -->
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -30,26 +29,24 @@
                 android:scaleType="centerCrop"
                 android:src="@drawable/bgdashboardadmin" />
 
-            <!-- CONTENT -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingHorizontal="22dp"
                 android:paddingTop="75dp">
 
-                <!-- BACK -->
                 <ImageView
                     android:id="@+id/btnBack"
                     android:layout_width="42dp"
                     android:layout_height="42dp"
                     android:background="@drawable/bg_circle_white"
                     android:padding="11dp"
+                    android:src="@drawable/ic_back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="#952D03" />
 
-                <!-- TITLE -->
                 <TextView
                     android:id="@+id/titleText"
                     android:layout_width="wrap_content"
@@ -64,12 +61,9 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </FrameLayout>
-
     </androidx.cardview.widget.CardView>
 
-    <!-- TITLE LIST -->
     <TextView
         android:id="@+id/tvListPesanan"
         android:layout_width="wrap_content"
@@ -83,7 +77,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/headerCard" />
 
-    <!-- FILTER BUTTON -->
     <LinearLayout
         android:id="@+id/layoutFilter"
         android:layout_width="190dp"
@@ -103,7 +96,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Diproses"
-            android:textColor="#A63600"
+            android:textColor="#222222"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -114,13 +107,13 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="Selesai"
-            android:textColor="#222222"
+            android:textColor="#A63600"
             android:textSize="16sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- RECYCLER -->
+    <!-- ID DISAMAKAN: recyclerPesananSelesai -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerPesananSelesai"
         android:layout_width="0dp"
@@ -132,6 +125,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvListPesanan"
-        tools:listitem="@layout/pesananselesai_widget" />
+        tools:listitem="@layout/pesanansudah_widget" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
