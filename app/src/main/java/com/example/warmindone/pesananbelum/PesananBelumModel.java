@@ -1,17 +1,20 @@
-package com.example.warmindone.pesananselesai;
+package com.example.warmindone.pesananbelum;
 
 import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.Exclude;
 
-public class PesananSelesaiModel {
+public class PesananBelumModel {
 
     private String id_order;
     private String id_user;
     private String status;
     private String metode;
     private Timestamp tanggal_order;
+    
+    @Exclude // Hindari crash otomatis jika tipe data di DB tidak konsisten
     private long total_harga;
 
-    public PesananSelesaiModel() {
+    public PesananBelumModel() {
     }
 
     public String getId_order() {
@@ -54,10 +57,12 @@ public class PesananSelesaiModel {
         this.tanggal_order = tanggal_order;
     }
 
+    @Exclude
     public long getTotal_harga() {
         return total_harga;
     }
 
+    @Exclude
     public void setTotal_harga(long total_harga) {
         this.total_harga = total_harga;
     }

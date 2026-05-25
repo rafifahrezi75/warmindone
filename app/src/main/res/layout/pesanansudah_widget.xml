@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvInvoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INV-1214114"
+                android:textColor="#2B2B2B"
+                android:textSize="20sp"
+                android:fontFamily="@font/montserrat_bold"/>
+
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Selesai"
+                android:textColor="#43A047"
+                android:textSize="16sp"
+                android:fontFamily="@font/montserrat_semibold"/>
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/tvNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Customer Name"
+            android:textColor="#2D2D2D"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_semibold"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="email@example.com"
+            android:textColor="#9A9A9A"
+            android:textSize="14sp"
+            android:fontFamily="@font/montserrat_medium"/>
+
+        <TextView
+            android:id="@+id/tvTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="10 Mei 2026"
+            android:textColor="#9A9A9A"
+            android:textSize="13sp"
+            android:fontFamily="@font/montserrat_medium"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp 0"
+                android:textColor="#A63600"
+                android:textSize="22sp"
+                android:fontFamily="@font/montserrat_bold"/>
+
+            <TextView
+                android:id="@+id/tvMetode"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/bg_filter"
+                android:gravity="center"
+                android:minWidth="74dp"
+                android:paddingHorizontal="14dp"
+                android:text="Tunai"
+                android:textColor="#43A047"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
