@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_verticalMargin="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
-    android:background="@android:widget/toast_frame"
+    android:background="#FFFFFF"
     tools:ignore="HardcodedText,ContentDescription">
 
     <androidx.constraintlayout.widget.ConstraintLayout

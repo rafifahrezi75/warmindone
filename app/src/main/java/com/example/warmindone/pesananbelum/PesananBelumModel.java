@@ -10,7 +10,7 @@ public class PesananBelumModel {
     private String status;
     private String metode;
     private Timestamp tanggal_order;
-    
+
     @Exclude // Hindari crash otomatis jika tipe data di DB tidak konsisten
     private long total_harga;
 

@@ -47,7 +47,9 @@
 
         <!-- PESANAN & INCOME -->
         <activity android:name=".kasiradmin.PesananBelumActivity"/>
+        <activity android:name=".kasiradmin.PesananBelumDetailActivity"/>
         <activity android:name=".kasiradmin.PesananSudahActivity"/>
+        <activity android:name=".kasiradmin.PesananSudahDetailActivity"/>
         <activity android:name=".kasiradmin.PendapatanActivity"/>
 
         <meta-data

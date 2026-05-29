@@ -16,6 +16,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import android.content.Intent;
+
+import com.example.warmindone.kasiradmin.PesananBelumDetailActivity;
+
 public class PesananBelumAdapter extends RecyclerView.Adapter<PesananBelumAdapter.ViewHolder> {
 
     private Context context;
@@ -42,6 +46,7 @@ public class PesananBelumAdapter extends RecyclerView.Adapter<PesananBelumAdapte
 
         // INVOICE
         if (model.getId_order() != null) {
+
             String inv = model.getId_order().length() > 7
                     ? model.getId_order().substring(0, 7)
                     : model.getId_order();
@@ -57,23 +62,29 @@ public class PesananBelumAdapter extends RecyclerView.Adapter<PesananBelumAdapte
 
         // TOTAL
         holder.tvTotal.setText(
-                "Rp, " + String.format("%,d",
-                        model.getTotal_harga()).replace(',', '.')
+                "Rp, " + String.format(
+                        "%,d",
+                        model.getTotal_harga()
+                ).replace(',', '.')
         );
 
         // TANGGAL
         if (model.getTanggal_order() != null) {
 
             SimpleDateFormat sdf =
-                    new SimpleDateFormat("dd MMM yyyy",
-                            new Locale("id", "ID"));
+                    new SimpleDateFormat(
+                            "dd MMM yyyy",
+                            new Locale("id", "ID")
+                    );
 
             holder.tvTanggal.setText(
-                    sdf.format(model.getTanggal_order().toDate())
+                    sdf.format(
+                            model.getTanggal_order().toDate()
+                    )
             );
         }
 
-        // NAMA + EMAIL USER
+        // USER
         if (model.getId_user() != null) {
 
             db.collection("users")
@@ -83,37 +94,60 @@ public class PesananBelumAdapter extends RecyclerView.Adapter<PesananBelumAdapte
 
                         if (doc.exists()) {
 
-                            String nama = doc.getString("nama");
-                            String email = doc.getString("email");
+                            String nama =
+                                    doc.getString("nama");
+
+                            String email =
+                                    doc.getString("email");
 
                             holder.tvNama.setText(
-                                    nama != null ? nama : "Tanpa Nama"
+                                    nama != null
+                                            ? nama
+                                            : "Tanpa Nama"
                             );
 
                             holder.tvEmail.setText(
-                                    email != null ? email : "-"
+                                    email != null
+                                            ? email
+                                            : "-"
                             );
 
                         } else {
 
-                            holder.tvNama.setText("User tidak ditemukan");
-                            holder.tvEmail.setText("-");
+                            holder.tvNama.setText(
+                                    "User tidak ditemukan"
+                            );
 
+                            holder.tvEmail.setText("-");
                         }
                     })
                     .addOnFailureListener(e -> {
 
                         holder.tvNama.setText("Error");
                         holder.tvEmail.setText("-");
-
                     });
 
         } else {
 
             holder.tvNama.setText("Guest");
             holder.tvEmail.setText("-");
-
         }
+
+        // CLICK CARD
+        holder.itemView.setOnClickListener(v -> {
+
+            Intent intent = new Intent(
+                    context,
+                    PesananBelumDetailActivity.class
+            );
+
+            intent.putExtra(
+                    "id_order",
+                    model.getId_order()
+            );
+
+            context.startActivity(intent);
+        });
     }
 
     @Override

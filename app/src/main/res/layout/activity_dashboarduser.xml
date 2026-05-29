@@ -216,7 +216,7 @@
                     android:id="@+id/imgCartArrow"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@android:drawable/ic_menu_chevron"
+                    android:src="@android:drawable/ic_delete"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -245,7 +245,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@android:drawable/ic_menu_home"
+                    android:src="@drawable/ic_menu_logo"
                     app:tint="#A64B00" />
 
                 <TextView

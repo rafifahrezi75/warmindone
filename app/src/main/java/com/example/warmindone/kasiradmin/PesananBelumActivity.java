@@ -22,7 +22,7 @@ import java.util.List;
 
 public class PesananBelumActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerPesananSelesai;
+    private RecyclerView recyclerPesananBelum;
     private PesananBelumAdapter adapter;
     private List<PesananBelumModel> list;
     private FirebaseFirestore db;
@@ -33,7 +33,7 @@ public class PesananBelumActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesananbelum);
 
-        recyclerPesananSelesai = findViewById(R.id.recyclerPesananSelesai);
+        recyclerPesananBelum = findViewById(R.id.recyclerPesananBelum);
         tvSelesai = findViewById(R.id.tvSelesai);
         ImageView btnBack = findViewById(R.id.btnBack);
 
@@ -47,11 +47,17 @@ public class PesananBelumActivity extends AppCompatActivity {
             overridePendingTransition(0, 0);
         });
 
-        recyclerPesananSelesai.setLayoutManager(new LinearLayoutManager(this));
+        recyclerPesananBelum.setLayoutManager(new LinearLayoutManager(this));
         list = new ArrayList<>();
         adapter = new PesananBelumAdapter(this, list);
-        recyclerPesananSelesai.setAdapter(adapter);
+        recyclerPesananBelum.setAdapter(adapter);
 
+        loadPesananBelum();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         loadPesananBelum();
     }
 

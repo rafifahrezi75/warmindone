@@ -47,7 +47,7 @@
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@android:drawable/abc_ic_ab_back_material"
+                android:src="@android:drawable/ic_menu_agenda"
                 android:rotation="180"
                 app:tint="#FFFFFF" />
         </LinearLayout>
