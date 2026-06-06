@@ -29,7 +29,9 @@
         <activity android:name=".RegisterActivity"/>
 
         <!-- USER -->
-        <activity android:name=".user.DashboardUser"/>
+        <activity android:name=".pelanggan.DashboardUser"/>
+        <activity android:name=".pelanggan.DetailMenuUserActivity"/>
+        <activity android:name=".pelanggan.CheckoutActivity"/>
 
         <!-- ADMIN -->
         <activity android:name=".kasiradmin.DashboardKasirAdmin"/>
@@ -51,6 +53,7 @@
         <activity android:name=".kasiradmin.PesananSudahActivity"/>
         <activity android:name=".kasiradmin.PesananSudahDetailActivity"/>
         <activity android:name=".kasiradmin.PendapatanActivity"/>
+        <activity android:name=".kasiradmin.UserActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"

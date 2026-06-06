@@ -219,6 +219,7 @@
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
             app:cardCornerRadius="16dp"
+            android:onClick="userpage"
             app:cardElevation="6dp">
 
             <LinearLayout

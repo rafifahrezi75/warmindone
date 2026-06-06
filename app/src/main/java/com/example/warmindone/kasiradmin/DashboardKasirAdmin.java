@@ -34,4 +34,8 @@ public class DashboardKasirAdmin extends AppCompatActivity {
         Intent intent = new Intent(DashboardKasirAdmin.this, PesananBelumActivity.class);
         startActivity(intent);
     }
+    public void userpage(View view) {
+        Intent intent = new Intent(DashboardKasirAdmin.this, UserActivity.class);
+        startActivity(intent);
+    }
 }
