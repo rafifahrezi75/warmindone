@@ -32,6 +32,9 @@
         <activity android:name=".pelanggan.DashboardUser"/>
         <activity android:name=".pelanggan.DetailMenuUserActivity"/>
         <activity android:name=".pelanggan.CheckoutActivity"/>
+        <activity android:name=".pelanggan.RiwayatPesananActivity"/>
+        <activity android:name=".pelanggan.HistoryActivity"/>
+        <activity android:name=".pelanggan.DetailHistoryActivity"/>
 
         <!-- ADMIN -->
         <activity android:name=".kasiradmin.DashboardKasirAdmin"/>

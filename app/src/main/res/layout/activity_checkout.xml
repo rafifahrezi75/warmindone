@@ -122,91 +122,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#FFFFFF"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Harga"
-                            android:textColor="#000000"/>
-
-                        <TextView
-                            android:id="@+id/tvHargaPembayaran"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Rp0"
-                            android:textColor="#000000"
-                            android:textStyle="bold"/>
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Diskon"
-                            android:textColor="#000000"/>
-
-                        <TextView
-                            android:id="@+id/tvDiskonPembayaran"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Rp0"
-                            android:textColor="#000000"
-                            android:textStyle="bold"/>
-
-                    </RelativeLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginVertical="12dp"
-                        android:background="#DDDDDD"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Total"
-                            android:textColor="#000000"
-                            android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                        <TextView
-                            android:id="@+id/tvTotalPembayaran"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:text="Rp0"
-                            android:textColor="#A64B00"
-                            android:textSize="16sp"
-                            android:textStyle="bold"/>
-
-                    </RelativeLayout>
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
+                app:cardElevation="0dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -260,6 +176,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
                 app:cardElevation="0dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -270,15 +187,42 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Harga" android:textColor="#000000" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="Rp 20.000" android:textColor="#000000" android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Harga"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/tvHargaPembayaran"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rp0"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Diskon" android:textColor="#000000" />
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="0" android:textColor="#000000" android:textStyle="bold"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Diskon"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/tvDiskonPembayaran"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rp0"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
                     <View
@@ -290,10 +234,28 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Total" android:textColor="#000000" android:textStyle="bold" android:textSize="16sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_alignParentEnd="true" android:text="Rp 20.000" android:textColor="#A64B00" android:textStyle="bold" android:textSize="16sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total"
+                            android:textColor="#000000"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvTotalPembayaran"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="Rp0"
+                            android:textColor="#A64B00"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
+
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>

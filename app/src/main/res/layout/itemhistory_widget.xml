@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- STATUS -->
+        <TextView
+            android:id="@+id/tvStatus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BERHASIL"
+            android:textColor="#A64B00"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <!-- TANGGAL -->
+        <TextView
+            android:id="@+id/tvTanggal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="24 Mei 2025, 12:30"
+            android:textColor="#666666"
+            android:textSize="13sp"/>
+
+        <!-- MENU -->
+        <TextView
+            android:id="@+id/tvNamaMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Mie Bangladesh"
+            android:textColor="#000000"
+            android:textSize="17sp"
+            android:textStyle="bold"/>
+
+        <!-- QTY -->
+        <TextView
+            android:id="@+id/tvJumlah"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1x"
+            android:textColor="#666666"
+            android:textSize="13sp"/>
+
+        <!-- ADDON -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAddon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/itemhistory_widget"/>
+
+        <!-- GARIS -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="#E0E0E0"/>
+
+        <!-- FOOTER -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvItemCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 item"
+                    android:textColor="#666666"
+                    android:textSize="12sp"/>
+
+                <TextView
+                    android:id="@+id/tvTotalHarga"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp20.000"
+                    android:textColor="#A64B00"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSelengkapnya"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_alignParentEnd="true"
+                android:backgroundTint="#A64B00"
+                android:text="Selengkapnya"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

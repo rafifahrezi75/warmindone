@@ -2,6 +2,7 @@ package com.example.warmindone.pelanggan;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -199,7 +200,138 @@ public class DetailMenuUserActivity extends AppCompatActivity {
             ArrayList<AddonUserModel> selectedAddons,
             long totalHarga) {
 
-        HashMap<String, Object> keranjang =
+        db.collection("keranjang")
+                .whereEqualTo("id_user", userId)
+                .whereEqualTo("id_menu", menuId)
+                .get()
+                .addOnSuccessListener(query -> {
+
+                    boolean ditemukan = false;
+
+                    for (com.google.firebase.firestore.DocumentSnapshot cartDoc :
+                            query.getDocuments()) {
+
+                        String keranjangId =
+                                cartDoc.getId();
+
+                        db.collection("keranjang_detail")
+                                .whereEqualTo(
+                                        "id_keranjang",
+                                        keranjangId
+                                )
+                                .get()
+                                .addOnSuccessListener(detailQuery -> {
+
+                                    ArrayList<String> addonLama =
+                                            new ArrayList<>();
+
+                                    for (var d :
+                                            detailQuery.getDocuments()) {
+
+                                        String idAddon =
+                                                d.getString(
+                                                        "id_addon"
+                                                );
+
+                                        if (idAddon != null) {
+                                            addonLama.add(idAddon);
+                                        }
+                                    }
+
+                                    ArrayList<String> addonBaru =
+                                            new ArrayList<>();
+
+                                    for (AddonUserModel addon :
+                                            selectedAddons) {
+
+                                        addonBaru.add(
+                                                addon.getId()
+                                        );
+                                    }
+
+                                    java.util.Collections.sort(
+                                            addonLama
+                                    );
+
+                                    java.util.Collections.sort(
+                                            addonBaru
+                                    );
+
+                                    if (addonLama.equals(
+                                            addonBaru
+                                    )) {
+
+                                        long jumlahLama =
+                                                cartDoc.getLong(
+                                                        "jumlah"
+                                                ) == null
+                                                        ? 0
+                                                        : cartDoc.getLong(
+                                                        "jumlah"
+                                                );
+
+                                        long hargaLama =
+                                                cartDoc.getLong(
+                                                        "harga"
+                                                ) == null
+                                                        ? 0
+                                                        : cartDoc.getLong(
+                                                        "harga"
+                                                );
+
+                                        cartDoc.getReference()
+                                                .update(
+                                                        "jumlah",
+                                                        jumlahLama + quantity,
+                                                        "harga",
+                                                        hargaLama + totalHarga
+                                                );
+
+                                        Toast.makeText(
+                                                DetailMenuUserActivity.this,
+                                                "Jumlah diperbarui",
+                                                Toast.LENGTH_SHORT
+                                        ).show();
+
+                                        startActivity(
+                                                new Intent(
+                                                        DetailMenuUserActivity.this,
+                                                        CheckoutActivity.class
+                                                )
+                                        );
+
+                                        finish();
+                                    } else {
+
+                                        buatKeranjangBaru(
+                                                userId,
+                                                selectedAddons,
+                                                totalHarga
+                                        );
+                                    }
+                                });
+
+                        ditemukan = true;
+                        break;
+                    }
+
+                    if (!ditemukan) {
+
+                        buatKeranjangBaru(
+                                userId,
+                                selectedAddons,
+                                totalHarga
+                        );
+                    }
+                });
+    }
+
+    private void buatKeranjangBaru(
+            String userId,
+            ArrayList<AddonUserModel> selectedAddons,
+            long totalHarga) {
+
+        HashMap<String,Object> keranjang =
                 new HashMap<>();
 
         keranjang.put("id_user", userId);
@@ -209,92 +341,58 @@ public class DetailMenuUserActivity extends AppCompatActivity {
 
         db.collection("keranjang")
                 .add(keranjang)
-                .addOnSuccessListener(
-                        keranjangRef -> {
+                .addOnSuccessListener(keranjangRef -> {
 
-                            String keranjangId =
-                                    keranjangRef.getId();
+                    String keranjangId =
+                            keranjangRef.getId();
 
-                            for (AddonUserModel addon :
-                                    selectedAddons) {
+                    for (AddonUserModel addon :
+                            selectedAddons) {
 
-                                db.collection("addon")
-                                        .document(
-                                                addon.getId()
-                                        )
-                                        .get()
-                                        .addOnSuccessListener(
-                                                addonDoc -> {
+                        HashMap<String,Object> detail =
+                                new HashMap<>();
 
-                                                    Long stokAddon =
-                                                            addonDoc.getLong(
-                                                                    "stok"
-                                                            );
+                        detail.put(
+                                "id_keranjang",
+                                keranjangId
+                        );
 
-                                                    if (stokAddon == null)
-                                                        stokAddon = 0L;
+                        detail.put(
+                                "id_addon",
+                                addon.getId()
+                        );
 
-                                                    addonDoc
-                                                            .getReference()
-                                                            .update(
-                                                                    "stok",
-                                                                    stokAddon - quantity
-                                                            );
-                                                });
+                        detail.put(
+                                "jumlah",
+                                quantity
+                        );
 
-                                HashMap<String, Object>
-                                        detail =
-                                        new HashMap<>();
+                        detail.put(
+                                "harga",
+                                addon.getHarga()
+                                        * quantity
+                        );
 
-                                detail.put(
-                                        "id_keranjang",
-                                        keranjangId
-                                );
+                        db.collection(
+                                        "keranjang_detail")
+                                .add(detail);
+                    }
 
-                                detail.put(
-                                        "id_addon",
-                                        addon.getId()
-                                );
+                    Toast.makeText(
+                            DetailMenuUserActivity.this,
+                            "Berhasil ditambahkan",
+                            Toast.LENGTH_SHORT
+                    ).show();
 
-                                detail.put(
-                                        "jumlah",
-                                        quantity
-                                );
-
-                                detail.put(
-                                        "harga",
-                                        addon.getHarga()
-                                                * quantity
-                                );
-
-                                db.collection(
-                                                "keranjang_detail")
-                                        .add(detail);
-                            }
-
-                            Toast.makeText(
+                    startActivity(
+                            new Intent(
                                     DetailMenuUserActivity.this,
-                                    "Berhasil ditambahkan ke keranjang",
-                                    Toast.LENGTH_SHORT
-                            ).show();
+                                    CheckoutActivity.class
+                            )
+                    );
 
-                            startActivity(
-                                    new Intent(
-                                            DetailMenuUserActivity.this,
-                                            CheckoutActivity.class
-                                    )
-                            );
-
-                            finish();
-                        })
-                .addOnFailureListener(e ->
-
-                        Toast.makeText(
-                                DetailMenuUserActivity.this,
-                                e.getMessage(),
-                                Toast.LENGTH_LONG
-                        ).show()
-                );
+                    finish();
+                });
     }
 
     private void loadMenu(String menuId) {

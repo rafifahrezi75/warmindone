@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
-        android:text="Pesanan"
+        android:text="Riwayat Pesanan"
         android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -24,12 +25,13 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
+        app:cardBackgroundColor="#FDF4E7"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
-        app:cardBackgroundColor="#FDF4E7"
         app:layout_constraintBottom_toBottomOf="@id/tvTitlePesanan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTitlePesanan">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -38,76 +40,33 @@
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/layoutTogglePesanan"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginTop="24dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="0dp"
-        app:cardBackgroundColor="#FFFFFF"
-        android:background="@android:drawable/toast_frame"
-        app:layout_constraintTop_toBottomOf="@id/tvTitlePesanan">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/tabDiproses"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Diproses"
-                android:textColor="#A64B00"
-                android:textStyle="bold"
-                android:textSize="14sp"
-                android:background="?attr/selectableItemBackground" />
-
-            <TextView
-                android:id="@+id/tabSelesai"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Selesai"
-                android:textColor="#555555"
-                android:textSize="14sp"
-                android:background="?attr/selectableItemBackground" />
-        </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/tvStatusDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:text="Pesanan kamu sedang diproses nih!\nHarap bersabar Yaa"
+        android:text="Daftar pesanan yang telah selesai"
         android:textAlignment="center"
         android:textColor="#555555"
         android:textSize="14sp"
         android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/layoutTogglePesanan" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitlePesanan" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPesanan"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:paddingHorizontal="24dp"
         android:clipToPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:paddingHorizontal="24dp"
         app:layout_constraintTop_toBottomOf="@id/tvStatusDescription"
-        tools:listitem="@layout/item_pesanan_diproses" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/itemhistory_widget" />
 
     <LinearLayout
         android:id="@+id/layoutEmptyPesanan"
@@ -116,15 +75,15 @@
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tvStatusDescription"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutTogglePesanan">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Sepertinya kamu belum punya pesanan"
+            android:text="Belum ada riwayat pesanan"
             android:textColor="#000000"
             android:textSize="15sp"
             android:textStyle="italic" />
@@ -140,6 +99,7 @@
             android:textAllCaps="false"
             android:textColor="#A64B00"
             android:textStyle="bold" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

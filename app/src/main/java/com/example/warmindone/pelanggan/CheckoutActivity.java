@@ -1,5 +1,6 @@
 package com.example.warmindone.pelanggan;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -298,7 +299,7 @@ public class CheckoutActivity
                 new java.util.HashMap<>();
 
         order.put("id_user", userId);
-        order.put("total_harga", String.valueOf(totalHarga));
+        order.put("total_harga", totalHarga);
         order.put("bayar", totalHarga);
         order.put("kembali", 0);
         order.put("metode", "tunai");
@@ -383,11 +384,12 @@ public class CheckoutActivity
                                         });
                     }
 
-                    hapusKeranjang();
+                    hapusKeranjang(orderId);
                 });
     }
 
-    private void hapusKeranjang() {
+    private void hapusKeranjang(
+            String orderId) {
 
         db.collection("keranjang")
                 .whereEqualTo(
@@ -422,6 +424,19 @@ public class CheckoutActivity
 
                         doc.getReference().delete();
                     }
+
+                    Intent intent =
+                            new Intent(
+                                    CheckoutActivity.this,
+                                    RiwayatPesananActivity.class
+                            );
+
+                    intent.putExtra(
+                            "id_order",
+                            orderId
+                    );
+
+                    startActivity(intent);
 
                     finish();
                 });

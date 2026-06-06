@@ -1,8 +1,9 @@
 package com.example.warmindone.pelanggan;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.warmindone.R;
 import com.example.warmindone.menuuser.MenuAdapterUser;
 import com.example.warmindone.menuuser.MenuModelUser;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -103,6 +103,11 @@ public class DashboardUser extends AppCompatActivity {
         rvCamilan.setAdapter(adapterCamilan);
 
         loadMenu();
+    }
+
+    public void historypage(View view) {
+        Intent intent = new Intent(DashboardUser.this, HistoryActivity.class);
+        startActivity(intent);
     }
 
     private void loadMenu() {

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7">
+
+    <!-- HEADER -->
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/iconback" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Pembayaran"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#000000"/>
+    </RelativeLayout>
+
+    <!-- CONTENT -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardPembayaran"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="1dp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <!-- DETAIL PESANAN -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Pesanan"
+                    android:textStyle="bold"
+                    android:textColor="#B23A00"/>
+
+                <TextView
+                    android:id="@+id/tvTanggal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Rabu, 8 Apr 2026 20:46"
+                    android:textSize="12sp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvInvoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INV-123456"
+                android:textSize="12sp"
+                android:layout_marginTop="2dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#DDDDDD"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvPesanan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                tools:listitem="@layout/itempesanan_widget"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="10dp"
+                android:background="#DDDDDD"/>
+
+            <!-- PELANGGAN -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pelanggan"
+                    android:textStyle="bold"
+                    android:textColor="#B23A00"/>
+
+                <TextView
+                    android:id="@+id/tvNamaPelanggan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Agus Setiawan"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Bayar"
+                    android:textStyle="bold"
+                    android:textColor="#B23A00"/>
+
+                <TextView
+                    android:id="@+id/tvTotalBayar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Rp 20.000"
+                    android:textStyle="bold"
+                    android:textColor="#D32F2F"
+                    android:textSize="18sp"/>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Silakan menuju ke kasir untuk membayar pesananmu"
+                android:textColor="#D32F2F"
+                android:textStyle="italic"
+                android:textSize="12sp"
+                android:layout_marginTop="12dp"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- BUTTON -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnBayar"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_margin="24dp"
+        android:backgroundTint="#B23A00"
+        android:text="Selesai"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:cornerRadius="26dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
