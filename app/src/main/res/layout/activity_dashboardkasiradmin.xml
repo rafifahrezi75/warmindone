@@ -252,6 +252,7 @@
             android:layout_height="140dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:onClick="logout"
             app:cardCornerRadius="16dp"
             app:cardElevation="6dp">
 

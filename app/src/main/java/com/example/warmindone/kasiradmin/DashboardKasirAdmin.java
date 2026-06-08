@@ -5,6 +5,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.warmindone.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.example.warmindone.LoginActivity;
 
 import android.content.Intent;
 import android.view.View;
@@ -37,5 +39,13 @@ public class DashboardKasirAdmin extends AppCompatActivity {
     public void userpage(View view) {
         Intent intent = new Intent(DashboardKasirAdmin.this, UserActivity.class);
         startActivity(intent);
+    }
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(DashboardKasirAdmin.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

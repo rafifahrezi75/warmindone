@@ -17,6 +17,7 @@ import com.example.warmindone.R;
 import com.example.warmindone.addonuser.AddonUserAdapter;
 import com.example.warmindone.addonuser.AddonUserModel;
 import com.example.warmindone.menuuser.MenuModelUser;
+import com.example.warmindone.pelanggan.DashboardUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -51,6 +52,32 @@ public class DetailMenuUserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailmenuitem);
 
+        getOnBackPressedDispatcher().addCallback(this,
+                new androidx.activity.OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+
+                        Intent intent = new Intent(
+                                DetailMenuUserActivity.this,
+                                DashboardUser.class
+                        );
+
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+        findViewById(R.id.btnBackDetail)
+                .setOnClickListener(v -> {
+
+                    Intent intent = new Intent(
+                            DetailMenuUserActivity.this,
+                            DashboardUser.class
+                    );
+
+                    startActivity(intent);
+                    finish();
+                });
         imgMenu = findViewById(R.id.imgDetailMenu);
 
         tvNamaMenu =
