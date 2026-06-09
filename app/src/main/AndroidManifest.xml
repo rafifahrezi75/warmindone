@@ -37,6 +37,7 @@
         <activity android:name=".pelanggan.RiwayatPesananActivity"/>
         <activity android:name=".pelanggan.HistoryActivity"/>
         <activity android:name=".pelanggan.DetailHistoryActivity"/>
+        <activity android:name=".pelanggan.ProfileActivity"/>
 
         <!-- ADMIN -->
         <activity android:name=".kasiradmin.DashboardKasirAdmin"/>

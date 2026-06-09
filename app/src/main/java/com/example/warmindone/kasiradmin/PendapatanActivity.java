@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.example.warmindone.R;
 import com.example.warmindone.pendapatan.PendapatanAdapter;
@@ -25,6 +26,7 @@ public class PendapatanActivity extends AppCompatActivity {
     private RecyclerView recyclerPendapatan;
     private PendapatanAdapter adapter;
     private List<PendapatanModel> list;
+    private TextView tvTotalPendapatan;
 
     private FirebaseFirestore db;
 
@@ -34,6 +36,7 @@ public class PendapatanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pendapatan);
 
         recyclerPendapatan = findViewById(R.id.recyclerPendapatan);
+        tvTotalPendapatan = findViewById(R.id.tvTotalPendapatan);
         ImageView btnBack = findViewById(R.id.btnBack);
 
         btnBack.setOnClickListener(v -> finish());
@@ -53,25 +56,33 @@ public class PendapatanActivity extends AppCompatActivity {
     private void loadDataPendapatan() {
 
         db.collection("pendapatan")
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                .addSnapshotListener((value, error) -> {
 
-                        if (task.isSuccessful()) {
-
-                            list.clear();
-
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-
-                                PendapatanModel model = document.toObject(PendapatanModel.class);
-
-                                list.add(model);
-                            }
-
-                            adapter.notifyDataSetChanged();
-                        }
+                    if (error != null || value == null) {
+                        return;
                     }
+
+                    list.clear();
+
+                    long totalSemuaPendapatan = 0;
+
+                    for (QueryDocumentSnapshot document : value) {
+
+                        PendapatanModel model =
+                                document.toObject(PendapatanModel.class);
+
+                        list.add(model);
+
+                        totalSemuaPendapatan += model.getTotal();
+                    }
+
+                    adapter.notifyDataSetChanged();
+
+                    tvTotalPendapatan.setText(
+                            "Rp " +
+                                    String.format("%,d", totalSemuaPendapatan)
+                                            .replace(',', '.')
+                    );
                 });
     }
 }

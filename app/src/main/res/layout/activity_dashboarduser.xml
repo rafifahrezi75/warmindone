@@ -43,7 +43,9 @@
                 android:layout_alignStart="@id/tvLokasiLabel"
                 android:layout_marginTop="4dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:clickable="true"
+                android:focusable="true">
 
                 <ImageView
                     android:layout_width="16dp"
@@ -68,38 +70,61 @@
                     app:tint="#FFFFFF" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvProfileCircle"
+            <androidx.cardview.widget.CardView
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignTop="@id/tvLokasiLabel"
                 android:layout_alignBottom="@id/layoutLokasiDetail"
                 android:layout_marginEnd="24dp"
-                android:background="@android:drawable/toast_frame"
-                android:backgroundTint="#FFFFFF"
-                android:gravity="center"
-                android:text="F"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                app:cardBackgroundColor="#FDF4E7"
+                app:cardCornerRadius="22.5dp"
+                app:cardElevation="2dp">
+
+                <TextView
+                    android:id="@+id/tvProfileCircle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="F"
+                    android:textColor="#A64B00"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+            </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_below="@id/layoutLokasiDetail"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            android:background="@android:drawable/editbox_background_normal"
+            android:padding="4dp">
 
             <EditText
                 android:id="@+id/etSearch"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_below="@id/layoutLokasiDetail"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="24dp"
-                android:background="@android:drawable/editbox_background_normal"
-                android:backgroundTint="#FFFFFF"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:hint="Cari sesuatu"
                 android:inputType="text"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                android:textColorHint="#888888"
-                android:textSize="14sp" />
+                android:paddingStart="12dp"
+                android:textSize="14sp"
+                android:background="@null"
+                android:textColorHint="#888888"/>
+
+            <Button
+                android:id="@+id/btnSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Cari"
+                android:textSize="12sp"
+                android:backgroundTint="#A64B00"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
         </RelativeLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

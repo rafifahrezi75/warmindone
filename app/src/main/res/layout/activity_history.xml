@@ -22,12 +22,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:layout_marginEnd="24dp"
-        app:cardBackgroundColor="#FDF4E7"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp"
+        app:cardBackgroundColor="#A64B00"
+        app:cardCornerRadius="22.5dp"
+        app:cardElevation="2dp"
         app:layout_constraintBottom_toBottomOf="@id/tvTitlePesanan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tvTitlePesanan">
@@ -39,6 +39,16 @@
             android:text="F"
             android:textColor="#000000"
             android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvProfileCircle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="F"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
             android:textStyle="bold" />
 
     </androidx.cardview.widget.CardView>

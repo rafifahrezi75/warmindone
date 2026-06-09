@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Toast;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +21,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     TextInputEditText etEmail, etNoHp, etUsername, etPassword;
     MaterialButton btnRegister;
-
+    ImageView btnBack;
+    TextView txtMasuk;
     FirebaseAuth auth;
     FirebaseFirestore db;
 
@@ -36,6 +39,20 @@ public class RegisterActivity extends AppCompatActivity {
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
         btnRegister = findViewById(R.id.btnRegister);
+        btnBack = findViewById(R.id.bgRegister);
+        txtMasuk = findViewById(R.id.txtMasukWelcome);
+
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+        });
+
+        txtMasuk.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         btnRegister.setOnClickListener(v -> registerUser());
     }
