@@ -5,9 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:ignore="HardcodedText,ContentDescription">
+    android:background="#FFFFFF">
 
+    <!-- Judul -->
     <TextView
         android:id="@+id/tvTitlePesanan"
         android:layout_width="wrap_content"
@@ -19,18 +19,20 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
+    <!-- Avatar -->
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardProfile"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
         app:cardBackgroundColor="#FDF4E7"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
+        app:layout_constraintTop_toTopOf="@id/tvTitlePesanan"
         app:layout_constraintBottom_toBottomOf="@id/tvTitlePesanan"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tvTitlePesanan">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:layout_width="match_parent"
@@ -39,35 +41,43 @@
             android:text="F"
             android:textColor="#000000"
             android:textSize="16sp"
-            android:textStyle="bold" />
-
+            android:textStyle="bold"/>
     </androidx.cardview.widget.CardView>
 
+    <!-- Deskripsi -->
     <TextView
         android:id="@+id/tvStatusDescription"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
+        android:gravity="center"
         android:text="Daftar pesanan yang telah selesai"
-        android:textAlignment="center"
         android:textColor="#555555"
         android:textSize="14sp"
         android:textStyle="italic"
-        app:layout_constraintTop_toBottomOf="@id/tvTitlePesanan" />
+        app:layout_constraintTop_toBottomOf="@id/tvTitlePesanan"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPesanan"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:clipToPadding="false"
-        android:paddingHorizontal="24dp"
+        android:overScrollMode="never"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         app:layout_constraintTop_toBottomOf="@id/tvStatusDescription"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/itemhistory_widget" />
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/itemhistory_widget"/>
 
+    <!-- Empty State -->
     <LinearLayout
         android:id="@+id/layoutEmptyPesanan"
         android:layout_width="wrap_content"
@@ -76,7 +86,7 @@
         android:orientation="vertical"
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/tvStatusDescription"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -86,7 +96,7 @@
             android:text="Belum ada riwayat pesanan"
             android:textColor="#000000"
             android:textSize="15sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnEmptyPesan"
@@ -98,7 +108,70 @@
             android:text="Pesan"
             android:textAllCaps="false"
             android:textColor="#A64B00"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <LinearLayout
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="70dp"
+        android:background="#FFFFFF"
+        android:elevation="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <!-- Beranda -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="homePage">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_menu_logo"
+                app:tint="#888888"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Beranda"
+                android:textColor="#888888"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- Pesanan -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="historyPage">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_agenda"
+                app:tint="#A64B00"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pesanan"
+                android:textColor="#A64B00"
+                android:textSize="12sp"/>
+        </LinearLayout>
 
     </LinearLayout>
 
