@@ -246,11 +246,6 @@ public class PesananBelumDetailActivity extends AppCompatActivity {
         });
     }
 
-    public void backpage(View view) {
-        Intent intent = new Intent(PesananBelumDetailActivity.this, PesananBelumActivity.class);
-        startActivity(intent);
-    }
-
     private void loadDetailPesanan(String idOrder) {
 
         list.clear();

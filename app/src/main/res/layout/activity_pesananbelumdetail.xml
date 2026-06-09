@@ -38,7 +38,6 @@
                 android:layout_marginStart="20dp"
                 android:background="@drawable/bg_circle_white"
                 android:padding="10dp"
-                android:onClick="backpage"
                 app:tint="#A63600"/>
 
             <TextView
