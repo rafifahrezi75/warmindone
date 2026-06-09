@@ -18,9 +18,11 @@ import com.example.warmindone.R;
 import com.example.warmindone.history.HistoryAdapter;
 import com.example.warmindone.history.HistoryAddonModel;
 import com.example.warmindone.history.HistoryModel;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import android.util.Log;
+
 
 import java.util.ArrayList;
 
@@ -175,11 +177,19 @@ public class HistoryActivity extends AppCompatActivity {
 
     private void loadHistory() {
 
-        String userId =
+        FirebaseUser user =
                 FirebaseAuth
                         .getInstance()
-                        .getCurrentUser()
-                        .getUid();
+                        .getCurrentUser();
+
+        Log.d("HISTORY", "User = " + user);
+
+        if (user == null) {
+            Log.e("HISTORY", "User belum login!");
+            return;
+        }
+
+        String userId = user.getUid();
 
         db.collection("orders")
                 .whereEqualTo(
@@ -242,25 +252,34 @@ public class HistoryActivity extends AppCompatActivity {
                                 )
                         );
 
-                        Long totalHarga =
-                                orderDoc.getLong(
-                                        "total_harga"
-                                );
+                        Object hargaObj = orderDoc.get("total_harga");
 
-                        if(totalHarga == null) {
-                            totalHarga = 0L;
+                        long totalHarga = 0;
+
+                        if (hargaObj instanceof Long) {
+                            totalHarga = (Long) hargaObj;
+                        } else if (hargaObj instanceof Integer) {
+                            totalHarga = ((Integer) hargaObj).longValue();
+                        } else if (hargaObj instanceof String) {
+                            try {
+                                totalHarga = Long.parseLong((String) hargaObj);
+                            } catch (Exception e) {
+                                totalHarga = 0;
+                            }
                         }
 
-                        model.setTotalHarga(
-                                totalHarga
-                        );
+                        model.setTotalHarga(totalHarga);
 
                         loadMenuPertama(
                                 orderDoc.getId(),
                                 model
                         );
                     }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e("HISTORY", "Query orders gagal", e);
                 });
+
     }
 
     private void loadMenuPertama(
@@ -289,11 +308,13 @@ public class HistoryActivity extends AppCompatActivity {
                             query.getDocuments()
                                     .get(0);
 
-                    model.setJumlah(
-                            detailDoc.getLong(
-                                    "jumlah"
-                            )
-                    );
+                    Long jumlah = detailDoc.getLong("jumlah");
+
+                    if (jumlah == null) {
+                        jumlah = 0L;
+                    }
+
+                    model.setJumlah(jumlah);
 
                     String idMenu =
                             detailDoc.getString(

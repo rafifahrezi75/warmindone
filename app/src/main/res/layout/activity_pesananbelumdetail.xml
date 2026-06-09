@@ -106,26 +106,29 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tvInvoice"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="INV-1214114"
+                                android:text=""
                                 android:textColor="#333333"
                                 android:textSize="20sp"
                                 android:textStyle="bold"/>
 
                             <TextView
+                                android:id="@+id/tvTanggal"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="4dp"
-                                android:text="Rabu, 8 Apr 2026 20:46"
+                                android:text=""
                                 android:textColor="#777777"
                                 android:textSize="14sp"/>
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/tvStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Belum Dibayar"
+                            android:text=""
                             android:textColor="#A63600"
                             android:textSize="14sp"
                             android:textStyle="bold"/>
@@ -170,9 +173,10 @@
                             android:textStyle="bold"/>
 
                         <TextView
+                            android:id="@+id/tvTotal"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Rp 20.000"
+                            android:text=""
                             android:textColor="#A63600"
                             android:textSize="20sp"
                             android:textStyle="bold"/>

@@ -63,7 +63,7 @@ public class PesananBelumActivity extends AppCompatActivity {
 
     private void loadPesananBelum() {
         db.collection("orders")
-                .whereEqualTo("status", "diproses")
+                .whereEqualTo("status", "pending")
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     list.clear();

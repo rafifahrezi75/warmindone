@@ -329,81 +329,66 @@ public class CheckoutActivity
                 .add(order)
                 .addOnSuccessListener(orderRef -> {
 
-                    String orderId =
-                            orderRef.getId();
+                    String orderId = orderRef.getId();
+
+                    if (cartList.isEmpty()) {
+                        hapusKeranjang(orderId);
+                        return;
+                    }
+
+                    final int totalCart = cartList.size();
+                    final int[] selesai = {0};
 
                     for (CartModel cart : cartList) {
 
-                        java.util.HashMap<String,Object>
-                                detail =
+                        java.util.HashMap<String, Object> detail =
                                 new java.util.HashMap<>();
 
-                        detail.put(
-                                "id_order",
-                                orderId
-                        );
-
-                        detail.put(
-                                "id_menu",
-                                cart.getId_menu()
-                        );
-
-                        detail.put(
-                                "jumlah",
-                                cart.getJumlah()
-                        );
-
-                        detail.put(
-                                "subtotal",
-                                cart.getHarga()
-                        );
+                        detail.put("id_order", orderId);
+                        detail.put("id_menu", cart.getId_menu());
+                        detail.put("jumlah", cart.getJumlah());
+                        detail.put("subtotal", cart.getHarga());
 
                         db.collection("orders_detail")
                                 .add(detail)
-                                .addOnSuccessListener(
-                                        detailRef -> {
+                                .addOnSuccessListener(detailRef -> {
 
-                                            String detailId =
-                                                    detailRef.getId();
+                                    String detailId = detailRef.getId();
 
-                                            for (AddonUserModel addon
-                                                    : cart.getAddons()) {
+                                    if (cart.getAddons() != null) {
 
-                                                java.util.HashMap<String,Object>
-                                                        addonMap =
-                                                        new java.util.HashMap<>();
+                                        for (AddonUserModel addon : cart.getAddons()) {
 
-                                                addonMap.put(
-                                                        "id_detail",
-                                                        detailId
-                                                );
+                                            java.util.HashMap<String, Object> addonMap =
+                                                    new java.util.HashMap<>();
 
-                                                addonMap.put(
-                                                        "id_addon",
-                                                        addon.getId()
-                                                );
+                                            addonMap.put("id_detail", detailId);
+                                            addonMap.put("id_addon", addon.getId());
+                                            addonMap.put("jumlah", 1);
+                                            addonMap.put("subtotal", addon.getHarga());
 
-                                                addonMap.put(
-                                                        "jumlah",
-                                                        1
-                                                );
+                                            db.collection("order_detail_addon")
+                                                    .add(addonMap);
+                                        }
+                                    }
 
-                                                addonMap.put(
-                                                        "subtotal",
-                                                        addon.getHarga()
-                                                );
+                                    selesai[0]++;
 
-                                                db.collection(
-                                                                "order_detail_addon")
-                                                        .add(addonMap);
-                                            }
-                                        });
+                                    if (selesai[0] == totalCart) {
+                                        hapusKeranjang(orderId);
+                                    }
+                                })
+                                .addOnFailureListener(e -> {
+
+                                    selesai[0]++;
+
+                                    if (selesai[0] == totalCart) {
+                                        hapusKeranjang(orderId);
+                                    }
+                                });
                     }
-
-                    hapusKeranjang(orderId);
                 });
     }
-
     private void hapusKeranjang(
             String orderId) {
 
