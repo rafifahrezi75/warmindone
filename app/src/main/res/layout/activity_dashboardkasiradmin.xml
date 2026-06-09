@@ -163,7 +163,7 @@
                 <ImageView
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:src="@drawable/ic_kategori" />
+                    android:src="@drawable/ic_pnd" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                 <ImageView
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:src="@drawable/ic_kategori" />
+                    android:src="@drawable/ic_psn" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -265,7 +265,7 @@
                 <ImageView
                     android:layout_width="55dp"
                     android:layout_height="55dp"
-                    android:src="@drawable/ic_kategori" />
+                    android:src="@drawable/ic_klr" />
 
                 <TextView
                     android:layout_width="wrap_content"
