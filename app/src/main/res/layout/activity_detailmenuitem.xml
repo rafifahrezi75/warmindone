@@ -187,7 +187,7 @@
             android:background="@android:drawable/toast_frame"
             android:backgroundTint="#A64B00"
             android:onClick="eekpage"
-            android:text="Tambah Rp 20.000"
+            android:text="Tambah Keranjang"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
