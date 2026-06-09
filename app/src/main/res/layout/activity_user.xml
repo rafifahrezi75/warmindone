@@ -61,41 +61,34 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTambahUser"
-        android:layout_width="379dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="792dp"
         android:layout_marginEnd="16dp"
-
-        android:layout_marginBottom="40dp"
-        android:fontFamily="@font/montserrat_semibold"
+        android:layout_marginBottom="16dp"
         android:text="Tambah"
-
         android:textColor="@android:color/white"
         android:textSize="16sp"
-        app:backgroundTint="@color/secondary"
-        app:cornerRadius="16px"
-        app:elevation="4dp"
+        app:backgroundTint="#A64B00"
+        app:cornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerUser"
-        android:layout_width="388dp"
-        android:layout_height="445dp"
-
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="11dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:padding="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardView"
+        app:layout_constraintBottom_toTopOf="@id/btnTambahUser"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:listitem="@layout/user_widget" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/user_widget"/>
 
 
     <!-- RECYCLERVIEW -->

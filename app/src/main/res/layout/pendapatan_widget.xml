@@ -10,12 +10,11 @@
     android:orientation="horizontal"
     android:paddingHorizontal="16dp">
 
-    <!-- ICON BOX -->
+    <!-- ICON -->
     <LinearLayout
         android:layout_width="86dp"
         android:layout_height="86dp"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:gravity="center">
 
         <LinearLayout
             android:layout_width="62dp"
@@ -34,7 +33,7 @@
 
     </LinearLayout>
 
-    <!-- TEXT -->
+    <!-- INFORMASI -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -48,29 +47,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_semibold"
-            android:text="10 - April - 2024"
+            android:text="10 April 2025"
             android:textColor="#222222"
-            android:textSize="17sp" />
-
-        <!-- JUMLAH PESANAN -->
-        <TextView
-            android:id="@+id/tvJumlahPesanan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:fontFamily="@font/montserrat_medium"
-            android:text="20 Pesanan"
-            android:textColor="#9E9E9E"
-            android:textSize="13sp" />
+            android:textSize="16sp" />
 
         <!-- TOTAL -->
         <TextView
             android:id="@+id/tvTotalPendapatan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="Rp, 100.000"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Rp 100.000"
             android:textColor="#A63600"
             android:textSize="18sp" />
 

@@ -5,7 +5,10 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.widget.ImageView;
+import android.content.Intent;
 
+import com.example.warmindone.kasiradmin.DashboardKasirAdmin;
 import com.example.warmindone.R;
 import com.example.warmindone.user.UserAdapter;
 import com.example.warmindone.user.UserModel;
@@ -21,11 +24,23 @@ public class UserActivity extends AppCompatActivity {
     private UserAdapter adapter;
 
     private FirebaseFirestore db;
+    private ImageView btnBack2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
+
+        btnBack2 = findViewById(R.id.btnBack2);
+        btnBack2.setOnClickListener(v -> {
+            startActivity(
+                    new Intent(
+                            UserActivity.this,
+                            DashboardKasirAdmin.class
+                    )
+            );
+            finish();
+        });
 
         recyclerUser =
                 findViewById(R.id.recyclerUser);

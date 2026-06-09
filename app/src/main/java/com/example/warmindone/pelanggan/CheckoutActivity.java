@@ -13,6 +13,7 @@ import com.example.warmindone.addonuser.AddonUserModel;
 import com.example.warmindone.cart.CartAdapter;
 import com.example.warmindone.cart.CartModel;
 import com.example.warmindone.menuuser.MenuModelUser;
+import com.example.warmindone.pelanggan.DashboardUser;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -50,6 +51,21 @@ public class CheckoutActivity
 
         tvTotalPembayaran =
                 findViewById(R.id.tvTotalPembayaran);
+
+        findViewById(R.id.btnBackCheckout).setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    CheckoutActivity.this,
+                    DashboardUser.class
+            );
+
+            intent.addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP |
+                            Intent.FLAG_ACTIVITY_SINGLE_TOP
+            );
+
+            startActivity(intent);
+            finish();
+        });
 
         db = FirebaseFirestore.getInstance();
 

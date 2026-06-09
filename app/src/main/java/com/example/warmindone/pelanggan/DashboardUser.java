@@ -24,9 +24,17 @@ import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.widget.TextView;
-
+import android.widget.LinearLayout;
+import android.widget.Button;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import androidx.core.app.ActivityCompat;
 
+import android.app.AlertDialog;
+import android.content.SharedPreferences;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -55,6 +63,9 @@ public class DashboardUser extends AppCompatActivity {
     private MenuAdapterUser adapterMinuman;
     private MenuAdapterUser adapterCamilan;
 
+    private EditText etSearch;
+    private ArrayList<MenuModelUser> allMenu = new ArrayList<>();
+
     // Firestore ID Kategori
     private static final String ID_MAKANAN =
             "tSx53XeyQn3o9M39ZHJL";
@@ -67,6 +78,10 @@ public class DashboardUser extends AppCompatActivity {
 
     private TextView tvLokasi;
 
+    private LinearLayout layoutLokasiDetail;
+
+    private final Map<String, String[]> dataLokasi =
+            new LinkedHashMap<>();
     private FusedLocationProviderClient
             fusedLocationClient;
 
@@ -80,10 +95,30 @@ public class DashboardUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboarduser);
 
+        Button btnSearch = findViewById(R.id.btnSearch);
+
+        btnSearch.setOnClickListener(v -> {
+            filterMenu(etSearch.getText().toString());
+        });
+
         rvBestMenu = findViewById(R.id.rvBestMenu);
         rvMakanan = findViewById(R.id.rvMakanan);
         rvMinuman = findViewById(R.id.rvMinuman);
         rvCamilan = findViewById(R.id.rvCamilan);
+
+        etSearch = findViewById(R.id.etSearch);
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                filterMenu(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         listBestMenu = new ArrayList<>();
         listMakanan = new ArrayList<>();
@@ -139,14 +174,35 @@ public class DashboardUser extends AppCompatActivity {
                         R.id.tvLokasi
                 );
 
+        layoutLokasiDetail =
+                findViewById(R.id.layoutLokasiDetail);
+
+        initDataLokasi();
+
+        loadSavedLocation();
+
+        layoutLokasiDetail.setOnClickListener(
+                v -> showProvinsiDialog()
+        );
+
         fusedLocationClient =
-                LocationServices
-                        .getFusedLocationProviderClient(
-                                this
-                        );
+                LocationServices.getFusedLocationProviderClient(this);
 
-        ambilLokasi();
+        SharedPreferences prefs =
+                getSharedPreferences(
+                        "warmindone",
+                        MODE_PRIVATE
+                );
 
+        String lokasiTersimpan =
+                prefs.getString(
+                        "lokasi",
+                        null
+                );
+
+        if (lokasiTersimpan == null) {
+            ambilLokasi();
+        }
         tvProfileCircle =
                 findViewById(
                         R.id.tvProfileCircle
@@ -154,14 +210,54 @@ public class DashboardUser extends AppCompatActivity {
 
         loadProfile();
 
-        tvProfileCircle =
-                findViewById(
-                        R.id.tvProfileCircle
-                );
-
         tvProfileCircle.setOnClickListener(
                 v -> showProfileMenu(v)
         );
+    }
+
+    private void filterMenu(String keyword) {
+
+        String query = keyword.toLowerCase().trim();
+
+        if (query.isEmpty()) {
+            loadMenu();
+            return;
+        }
+
+        listBestMenu.clear();
+        listMakanan.clear();
+        listMinuman.clear();
+        listCamilan.clear();
+
+        for (MenuModelUser menu : allMenu) {
+
+            if (menu.getNama_menu() != null &&
+                    menu.getNama_menu().toLowerCase().contains(query)) {
+
+                listBestMenu.add(menu);
+
+                String kategori = menu.getId_kategori();
+
+                if (ID_MAKANAN.equals(kategori)) {
+                    listMakanan.add(menu);
+
+                } else if (ID_MINUMAN.equals(kategori)) {
+                    listMinuman.add(menu);
+
+                } else if (ID_CAMILAN.equals(kategori)) {
+                    listCamilan.add(menu);
+                }
+            }
+        }
+
+        updateUI();
+    }
+
+    private void updateUI() {
+        adapterBestMenu.notifyDataSetChanged();
+        adapterMakanan.notifyDataSetChanged();
+        adapterMinuman.notifyDataSetChanged();
+        adapterCamilan.notifyDataSetChanged();
     }
 
     private void showProfileMenu(View view) {
@@ -226,6 +322,7 @@ public class DashboardUser extends AppCompatActivity {
         popupMenu.show();
     }
 
+
     private void loadProfile() {
 
         String uid =
@@ -260,6 +357,173 @@ public class DashboardUser extends AppCompatActivity {
                 });
     }
 
+    private void initDataLokasi() {
+
+        dataLokasi.put(
+                "Jawa Timur",
+                new String[]{
+                        "Surabaya",
+                        "Sidoarjo",
+                        "Gresik",
+                        "Malang",
+                        "Mojokerto",
+                        "Jombang",
+                        "Kediri",
+                        "Blitar",
+                        "Madiun",
+                        "Banyuwangi",
+                        "Probolinggo",
+                        "Pasuruan",
+                        "Lamongan",
+                        "Tuban",
+                        "Bojonegoro"
+                }
+        );
+
+        dataLokasi.put(
+                "DKI Jakarta",
+                new String[]{
+                        "Jakarta Pusat",
+                        "Jakarta Barat",
+                        "Jakarta Timur",
+                        "Jakarta Selatan",
+                        "Jakarta Utara"
+                }
+        );
+
+        dataLokasi.put(
+                "Jawa Barat",
+                new String[]{
+                        "Bandung",
+                        "Bekasi",
+                        "Bogor",
+                        "Depok",
+                        "Cimahi",
+                        "Cirebon",
+                        "Sukabumi",
+                        "Tasikmalaya"
+                }
+        );
+
+        dataLokasi.put(
+                "Jawa Tengah",
+                new String[]{
+                        "Semarang",
+                        "Solo",
+                        "Salatiga",
+                        "Magelang",
+                        "Pekalongan",
+                        "Tegal"
+                }
+        );
+
+        dataLokasi.put(
+                "Bali",
+                new String[]{
+                        "Denpasar",
+                        "Badung",
+                        "Gianyar",
+                        "Tabanan",
+                        "Karangasem"
+                }
+        );
+    }
+
+    private void showProvinsiDialog() {
+
+        String[] provinsiAsli =
+                dataLokasi.keySet()
+                        .toArray(new String[0]);
+
+        String[] menu =
+                new String[provinsiAsli.length + 1];
+
+        menu[0] = "📍 Gunakan Lokasi GPS";
+
+        for (int i = 0; i < provinsiAsli.length; i++) {
+            menu[i + 1] = provinsiAsli[i];
+        }
+
+        new AlertDialog.Builder(this)
+                .setTitle("Pilih Lokasi")
+                .setItems(menu, (dialog, which) -> {
+
+                    // Opsi GPS
+                    if (which == 0) {
+
+                        ambilLokasi();
+
+                        return;
+                    }
+
+                    // Opsi Provinsi
+                    showKotaDialog(
+                            provinsiAsli[which - 1]
+                    );
+                })
+                .show();
+    }
+
+    private void showKotaDialog(
+            String provinsi) {
+
+        String[] kota =
+                dataLokasi.get(provinsi);
+
+        new AlertDialog.Builder(this)
+                .setTitle("Pilih Kota")
+                .setItems(kota,
+                        (dialog, which) -> {
+
+                            tvLokasi.setText(
+                                    kota[which]
+                            );
+
+                            saveLocation(
+                                    kota[which]
+                            );
+                        })
+                .show();
+    }
+
+    private void saveLocation(
+            String lokasi) {
+
+        SharedPreferences prefs =
+                getSharedPreferences(
+                        "warmindone",
+                        MODE_PRIVATE
+                );
+
+        prefs.edit()
+                .putString(
+                        "lokasi",
+                        lokasi
+                )
+                .apply();
+    }
+
+    private void loadSavedLocation() {
+
+        SharedPreferences prefs =
+                getSharedPreferences(
+                        "warmindone",
+                        MODE_PRIVATE
+                );
+
+        String lokasi =
+                prefs.getString(
+                        "lokasi",
+                        null
+                );
+
+        if(lokasi != null) {
+
+            tvLokasi.setText(
+                    lokasi
+            );
+        }
+    }
     private void ambilLokasi() {
 
         if (ActivityCompat.checkSelfPermission(
@@ -313,9 +577,12 @@ public class DashboardUser extends AppCompatActivity {
                                                 .getLocality();
                             }
 
-                            tvLokasi.setText(
-                                    kota
-                            );
+                            if (kota != null && !kota.trim().isEmpty()) {
+
+                                tvLokasi.setText(kota);
+
+                                saveLocation(kota);
+                            }
                         }
 
                     } catch (IOException e) {
@@ -359,6 +626,7 @@ public class DashboardUser extends AppCompatActivity {
 
                     if (!task.isSuccessful()) return;
 
+                    allMenu.clear();
                     listBestMenu.clear();
                     listMakanan.clear();
                     listMinuman.clear();
@@ -378,7 +646,7 @@ public class DashboardUser extends AppCompatActivity {
 
                         if (menu == null) continue;
 
-                        semuaMenu.add(menu);
+                        allMenu.add(menu);
 
                         String kategori =
                                 menu.getId_kategori();
