@@ -1,5 +1,6 @@
 package com.example.warmindone.kasiradmin;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -16,6 +17,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
@@ -242,6 +244,11 @@ public class PesananBelumDetailActivity extends AppCompatActivity {
                                 .show();
                     });
         });
+    }
+
+    public void backpage(View view) {
+        Intent intent = new Intent(PesananBelumDetailActivity.this, PesananBelumActivity.class);
+        startActivity(intent);
     }
 
     private void loadDetailPesanan(String idOrder) {
