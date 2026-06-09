@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputEditText etEmail, etPassword;
     MaterialButton btnLogin;
     TextView txtDaftar;
-
+    ImageView btnBack;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
 
@@ -34,8 +35,16 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin = findViewById(R.id.btnLogin);
         txtDaftar = findViewById(R.id.txtMasukWelcome);
 
+        btnBack = findViewById(R.id.bgRegister);
+
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+
+        btnBack.setOnClickListener(v -> {
+            Intent intent = new Intent(LoginActivity.this, WelcomeActivity.class);
+            startActivity(intent);
+            finish();
+        });
 
         btnLogin.setOnClickListener(v -> loginUser());
 

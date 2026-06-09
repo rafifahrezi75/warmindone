@@ -8,7 +8,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
+import android.widget.TextView;
+import android.widget.PopupMenu;
 
+import com.example.warmindone.LoginActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.example.warmindone.R;
 import com.example.warmindone.history.HistoryAdapter;
 import com.example.warmindone.history.HistoryAddonModel;
@@ -28,6 +33,7 @@ public class HistoryActivity extends AppCompatActivity {
 
     private ArrayList<HistoryModel> list;
     private HistoryAdapter adapter;
+    private TextView tvProfileCircle;
 
     @Override
     protected void onCreate(
@@ -65,7 +71,106 @@ public class HistoryActivity extends AppCompatActivity {
                 adapter
         );
 
+        tvProfileCircle =
+                findViewById(
+                        R.id.tvProfileCircle
+                );
+
+        loadProfile();
+
+        tvProfileCircle.setOnClickListener(
+                v -> showProfileMenu(v)
+        );
+
         loadHistory();
+    }
+
+    private void loadProfile() {
+
+        String uid =
+                FirebaseAuth
+                        .getInstance()
+                        .getCurrentUser()
+                        .getUid();
+
+        FirebaseFirestore.getInstance()
+                .collection("users")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(doc -> {
+
+                    if (!doc.exists()) return;
+
+                    String nama =
+                            doc.getString("nama");
+
+                    if (nama != null &&
+                            !nama.isEmpty()) {
+
+                        tvProfileCircle.setText(
+                                nama.substring(0, 1)
+                                        .toUpperCase()
+                        );
+                    }
+                });
+    }
+
+    private void showProfileMenu(View view) {
+
+        PopupMenu popupMenu =
+                new PopupMenu(
+                        this,
+                        view
+                );
+
+        popupMenu.getMenu().add(
+                "Profile"
+        );
+
+        popupMenu.getMenu().add(
+                "Logout"
+        );
+
+        popupMenu.setOnMenuItemClickListener(item -> {
+
+            if(item.getTitle()
+                    .equals("Profile")) {
+
+                Intent intent =
+                        new Intent(
+                                HistoryActivity.this,
+                                ProfileActivity.class
+                        );
+
+                startActivity(intent);
+
+            } else if(item.getTitle()
+                    .equals("Logout")) {
+
+                FirebaseAuth
+                        .getInstance()
+                        .signOut();
+
+                Intent intent =
+                        new Intent(
+                                HistoryActivity.this,
+                                LoginActivity.class
+                        );
+
+                intent.addFlags(
+                        Intent.FLAG_ACTIVITY_NEW_TASK
+                                | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                );
+
+                startActivity(intent);
+
+                finish();
+            }
+
+            return true;
+        });
+
+        popupMenu.show();
     }
 
     private void loadHistory() {

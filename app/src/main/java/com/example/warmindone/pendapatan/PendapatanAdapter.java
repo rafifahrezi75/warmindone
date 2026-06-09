@@ -28,7 +28,8 @@ public class PendapatanAdapter extends RecyclerView.Adapter<PendapatanAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.pendapatan_widget, parent, false);
+        View view = LayoutInflater.from(context)
+                .inflate(R.layout.pendapatan_widget, parent, false);
         return new ViewHolder(view);
     }
 
@@ -36,18 +37,25 @@ public class PendapatanAdapter extends RecyclerView.Adapter<PendapatanAdapter.Vi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PendapatanModel model = list.get(position);
 
+        // Format tanggal
         if (model.getTanggal() != null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd - MMMM - yyyy", new Locale("id", "ID"));
-            String formattedDate = sdf.format(model.getTanggal().toDate());
+            SimpleDateFormat sdf =
+                    new SimpleDateFormat("dd MMMM yyyy", new Locale("id", "ID"));
+
+            String formattedDate =
+                    sdf.format(model.getTanggal().toDate());
+
             holder.tvTanggal.setText(formattedDate);
         }
 
-        // Assuming 1 order detail per pendapatan entry for "Jumlah Pesanan" display
-        // or you might want to fetch this from another collection if it represents day summary.
-        // Based on the DB screenshot, it's per order.
-        holder.tvJumlahPesanan.setText("1 Pesanan"); 
-        
-        holder.tvTotalPendapatan.setText("Rp, " + String.format("%,d", model.getTotal()).replace(',', '.'));
+        // Format Rupiah
+        String totalFormatted =
+                String.format("%,d", model.getTotal())
+                        .replace(',', '.');
+
+        holder.tvTotalPendapatan.setText(
+                "Rp " + totalFormatted
+        );
     }
 
     @Override
@@ -56,12 +64,14 @@ public class PendapatanAdapter extends RecyclerView.Adapter<PendapatanAdapter.Vi
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTanggal, tvJumlahPesanan, tvTotalPendapatan;
+
+        TextView tvTanggal;
+        TextView tvTotalPendapatan;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
             tvTanggal = itemView.findViewById(R.id.tvTanggal);
-            tvJumlahPesanan = itemView.findViewById(R.id.tvJumlahPesanan);
             tvTotalPendapatan = itemView.findViewById(R.id.tvTotalPendapatan);
         }
     }
