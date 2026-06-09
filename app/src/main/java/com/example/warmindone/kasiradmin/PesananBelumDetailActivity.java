@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -47,7 +48,12 @@ public class PesananBelumDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pesananbelumdetail);
 
+        ImageView btnBack =
+                findViewById(R.id.btnBack);
+
         db = FirebaseFirestore.getInstance();
+
+        btnBack.setOnClickListener(v -> finish());
 
         recyclerDetailPesanan =
                 findViewById(R.id.recyclerDetailPesanan);
