@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.widget.ImageView;
 
 import com.example.warmindone.R;
 import com.example.warmindone.menu.MenuAdapter;
@@ -27,6 +28,8 @@ public class MenuActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
 
+    private ImageView btnBack;
+
     private MaterialButton btnTambahMenu;
 
     @Override
@@ -37,6 +40,8 @@ public class MenuActivity extends AppCompatActivity {
         recyclerMenu = findViewById(R.id.recyclerMenu);
 
         btnTambahMenu = findViewById(R.id.btnTambahMenu);
+
+        btnBack = findViewById(R.id.btnBack);
 
         recyclerMenu.setLayoutManager(
                 new LinearLayoutManager(this)
@@ -58,7 +63,10 @@ public class MenuActivity extends AppCompatActivity {
 
             startActivity(intent);
         });
-    }
+
+        btnBack.setOnClickListener(v -> {
+            finish();
+        });    }
 
     private void loadData() {
 
