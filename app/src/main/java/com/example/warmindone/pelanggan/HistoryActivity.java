@@ -422,4 +422,9 @@ public class HistoryActivity extends AppCompatActivity {
                     }
                 });
     }
+    public void dashboardPage(View view) {
+        Intent intent = new Intent(HistoryActivity.this, DashboardUser.class);
+        startActivity(intent);
+        finish();
+    }
 }

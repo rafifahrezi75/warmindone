@@ -618,69 +618,80 @@ public class DashboardUser extends AppCompatActivity {
     }
 
     private void loadMenu() {
-
+        // 1. Ambil data penjualan dari orders_detail terlebih dahulu
         FirebaseFirestore.getInstance()
-                .collection("menu")
+                .collection("orders_detail")
                 .get()
-                .addOnCompleteListener(task -> {
+                .addOnCompleteListener(taskDetail -> {
+                    if (!taskDetail.isSuccessful()) return;
 
-                    if (!task.isSuccessful()) return;
+                    Map<String, Long> counterMenuTerjual = new LinkedHashMap<>();
 
-                    allMenu.clear();
-                    listBestMenu.clear();
-                    listMakanan.clear();
-                    listMinuman.clear();
-                    listCamilan.clear();
+                    for (QueryDocumentSnapshot detailDoc : taskDetail.getResult()) {
+                        String idMenu = detailDoc.getString("id_menu");
+                        Long jumlah = detailDoc.getLong("jumlah");
 
-                    ArrayList<MenuModelUser> semuaMenu =
-                            new ArrayList<>();
-
-                    QuerySnapshot snapshot = task.getResult();
-
-                    for (QueryDocumentSnapshot document :
-                            snapshot) {
-
-                        MenuModelUser menu =
-                                document.toObject(
-                                        MenuModelUser.class);
-
-                        if (menu == null) continue;
-
-                        allMenu.add(menu);
-
-                        String kategori =
-                                menu.getId_kategori();
-
-                        if (ID_MAKANAN.equals(kategori)) {
-
-                            listMakanan.add(menu);
-
-                        } else if (ID_MINUMAN.equals(kategori)) {
-
-                            listMinuman.add(menu);
-
-                        } else if (ID_CAMILAN.equals(kategori)) {
-
-                            listCamilan.add(menu);
+                        if (idMenu != null && jumlah != null) {
+                            long totalLama = counterMenuTerjual.containsKey(idMenu) ? counterMenuTerjual.get(idMenu) : 0L;
+                            counterMenuTerjual.put(idMenu, totalLama + jumlah);
                         }
                     }
 
-                    // BEST MENU RANDOM 3 ITEM
-                    Collections.shuffle(semuaMenu);
+                    // 2. Ambil data master menu
+                    FirebaseFirestore.getInstance()
+                            .collection("menu")
+                            .get()
+                            .addOnCompleteListener(taskMenu -> {
+                                if (!taskMenu.isSuccessful()) return;
 
-                    int jumlah =
-                            Math.min(3, semuaMenu.size());
+                                allMenu.clear();
+                                listBestMenu.clear();
+                                listMakanan.clear();
+                                listMinuman.clear();
+                                listCamilan.clear();
 
-                    for (int i = 0; i < jumlah; i++) {
-                        listBestMenu.add(
-                                semuaMenu.get(i)
-                        );
-                    }
+                                QuerySnapshot snapshot = taskMenu.getResult();
 
-                    adapterBestMenu.notifyDataSetChanged();
-                    adapterMakanan.notifyDataSetChanged();
-                    adapterMinuman.notifyDataSetChanged();
-                    adapterCamilan.notifyDataSetChanged();
+                                for (QueryDocumentSnapshot document : snapshot) {
+                                    MenuModelUser menu = document.toObject(MenuModelUser.class);
+                                    if (menu == null) continue;
+
+                                    // Ambil ID dan Kategori langsung dari dokumen Firestore
+                                    String idDocument = document.getId();
+                                    String kategori = document.getString("id_kategori");
+
+                                    allMenu.add(menu);
+
+                                    // Pengelompokan Kategori
+                                    if (ID_MAKANAN.equals(kategori)) {
+                                        listMakanan.add(menu);
+                                    } else if (ID_MINUMAN.equals(kategori)) {
+                                        listMinuman.add(menu);
+                                    } else if (ID_CAMILAN.equals(kategori)) {
+                                        listCamilan.add(menu);
+                                    }
+
+                                    // FILTER BEST MENU
+                                    long totalTerjual = counterMenuTerjual.containsKey(idDocument) ? counterMenuTerjual.get(idDocument) : 0L;
+                                    if (totalTerjual > 5) {
+                                        listBestMenu.add(menu);
+                                    }
+                                }
+
+                                // Variasi susunan Best Menu
+                                Collections.shuffle(listBestMenu);
+
+                                // Batasi maksimal tampil 3 item list horizontal
+                                if (listBestMenu.size() > 3) {
+                                    listBestMenu = new ArrayList<>(listBestMenu.subList(0, 3));
+                                }
+
+                                // Pasang data baru ke semua Adapter UI
+                                adapterBestMenu.notifyDataSetChanged();
+                                adapterMakanan.notifyDataSetChanged();
+                                adapterMinuman.notifyDataSetChanged();
+                                adapterCamilan.notifyDataSetChanged();
+                            });
                 });
     }
 }
